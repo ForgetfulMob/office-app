@@ -8,28 +8,24 @@
 </head>
 <body>
 
-  <!-- Start Page -->
-  <div id="start-page" class="page active">
-    <img src="images.png" alt="School Logo" id="school-logo" />
-    <h1 id="welcome-message">Welcome to SWIS Office App</h1>
-    <button id="start-button">Enter</button>
-    <img src="settings-icon.png" alt="Settings" id="settings-icon" onclick="toggleSettings()" />
-    <div id="settings-panel">
-      <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
-      <button onclick="switchLanguage()">Language</button>
-    </div>
+<!-- Floor Selection Page -->
+<div id="floor-page" class="page">
+  <button class="back-button" onclick="goBack()">←</button>
+  <h2>Select a Floor</h2>
+  <div class="floor-buttons">
+    <button onclick="goToOffice(1)">1st Floor</button>
+    <button onclick="goToOffice(2)">2nd Floor</button>
+    <button onclick="goToOffice(3)">3rd Floor</button>
   </div>
+</div>
 
-  <!-- Floor Selection Page -->
-  <div id="floor-page" class="page">
-    <button id="back-button" onclick="goBack()">←</button>
-    <h2>Select a Floor</h2>
-    <div class="floor-buttons">
-      <button onclick="goToOffice(1)">1st Floor</button>
-      <button onclick="goToOffice(2)">2nd Floor</button>
-      <button onclick="goToOffice(3)">3rd Floor</button>
-    </div>
-  </div>
+<!-- Office Layout Page -->
+<div id="office-page" class="page">
+  <button class="back-button" onclick="goTo('floor-page')">←</button>
+  <h2 id="floor-title">1st Floor</h2>
+  <div id="office-layout" class="office-layout"></div>
+</div>
+
 
   <!-- Office Layout Page -->
   <div id="office-page" class="page">
