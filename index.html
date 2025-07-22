@@ -1,37 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>SWIS Office App</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Start Page -->
-  <div id="start-screen" class="page">
+  <!-- Start Screen -->
+  <div id="start-page" class="page">
+    <img src="logo.png" alt="SWIS Logo" class="logo"/>
     <h1>Welcome to the SWIS Office App</h1>
-    <button onclick="goToMenu()">Enter</button>
+    <button onclick="goToFloorSelect()">Enter</button>
+    <div class="settings-icon" onclick="toggleSettings()">⚙️</div>
+    <div id="settings-panel">
+      <button onclick="toggleDarkMode()">🌙 Dark Mode</button>
+      <button onclick="switchLanguage()">🌐 中文 / English</button>
+    </div>
   </div>
 
-  <!-- Main Menu -->
-  <div id="menu-screen" class="page hidden">
-    <h1>Choose a Floor</h1>
+  <!-- Floor Selection Page -->
+  <div id="floor-select" class="page hidden">
+    <button class="back-btn" onclick="goToStart()">⬅ Back</button>
+    <h2>Select a Floor</h2>
     <div class="floor-buttons">
-      <button onclick="selectFloor(1)">1st Floor</button>
-      <button onclick="selectFloor(2)">2nd Floor</button>
-      <button onclick="selectFloor(3)">3rd Floor</button>
+      <button onclick="loadOffice('1st')">1st Floor</button>
+      <button onclick="loadOffice('2nd')">2nd Floor</button>
+      <button onclick="loadOffice('3rd')">3rd Floor</button>
     </div>
   </div>
 
-  <!-- Office Page -->
-  <div id="office-screen" class="page hidden">
-    <button onclick="goBack()">← Back</button>
-    <h2 id="floor-label">Floor</h2>
-    <div class="office">
-      <div class="corner" id="corner-1"></div>
-      <div class="corner" id="corner-2"></div>
-      <div class="corner" id="corner-3"></div>
-      <div class="corner" id="corner-4"></div>
-    </div>
+  <!-- Office Map Page -->
+  <div id="office-map" class="page hidden">
+    <button class="back-btn" onclick="goToFloorSelect()">⬅ Back</button>
+    <h2 id="floor-title">Office</h2>
+    <div id="map-container"></div>
   </div>
 
   <script src="script.js"></script>
