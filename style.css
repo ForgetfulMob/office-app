@@ -8,19 +8,6 @@ body {
   align-items: center;
   height: 100vh;
 }
-.back-button {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  padding: 8px 12px;
-  font-size: 18px;
-  background-color: #ccc;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  z-index: 10;
-}
-
 
 .page {
   display: none;
