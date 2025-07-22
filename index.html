@@ -2,18 +2,35 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Office App</title>
+  <title>SWIS Office App</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="loading">Loading...</div>
+  <!-- Start Page -->
+  <div id="start-screen" class="page">
+    <h1>Welcome to the SWIS Office App</h1>
+    <button onclick="goToMenu()">Enter</button>
+  </div>
 
-  <div id="main" class="hidden">
+  <!-- Main Menu -->
+  <div id="menu-screen" class="page hidden">
+    <h1>Choose a Floor</h1>
+    <div class="floor-buttons">
+      <button onclick="selectFloor(1)">1st Floor</button>
+      <button onclick="selectFloor(2)">2nd Floor</button>
+      <button onclick="selectFloor(3)">3rd Floor</button>
+    </div>
+  </div>
+
+  <!-- Office Page -->
+  <div id="office-screen" class="page hidden">
+    <button onclick="goBack()">← Back</button>
+    <h2 id="floor-label">Floor</h2>
     <div class="office">
-      <div class="table corner top-left" onclick="cycleColor(this)"></div>
-      <div class="table corner top-right" onclick="cycleColor(this)"></div>
-      <div class="table corner bottom-left" onclick="cycleColor(this)"></div>
-      <div class="table corner bottom-right" onclick="cycleColor(this)"></div>
+      <div class="corner" id="corner-1"></div>
+      <div class="corner" id="corner-2"></div>
+      <div class="corner" id="corner-3"></div>
+      <div class="corner" id="corner-4"></div>
     </div>
   </div>
 
