@@ -2,41 +2,40 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SWIS Office App</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+
   <!-- Start Page -->
   <div id="start-page" class="page active">
-    <img id="swis-logo" src="images.png" alt="SWIS Logo" />
-    <div id="welcome-message">Welcome to SWIS Office App</div>
+    <img src="image.png" alt="School Logo" id="school-logo" />
+    <h1 id="welcome-message">Welcome to SWIS Office App</h1>
     <button id="start-button">Enter</button>
+    <img src="settings-icon.png" alt="Settings" id="settings-icon" onclick="toggleSettings()" />
+    <div id="settings-panel">
+      <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
+      <button onclick="switchLanguage()">Language</button>
+    </div>
   </div>
 
-  <!-- Floor Select Page -->
+  <!-- Floor Selection Page -->
   <div id="floor-page" class="page">
-    <button class="back-btn" onclick="goBack()">←</button>
+    <button id="back-button" onclick="goBack()">←</button>
     <h2>Select a Floor</h2>
     <div class="floor-buttons">
-      <button class="floor-btn" onclick="goToOffice(1)">1st Floor</button>
-      <button class="floor-btn" onclick="goToOffice(2)">2nd Floor</button>
-      <button class="floor-btn" onclick="goToOffice(3)">3rd Floor</button>
+      <button onclick="goToOffice(1)">1st Floor</button>
+      <button onclick="goToOffice(2)">2nd Floor</button>
+      <button onclick="goToOffice(3)">3rd Floor</button>
     </div>
   </div>
 
   <!-- Office Layout Page -->
   <div id="office-page" class="page">
-    <button class="back-btn" onclick="goToFloorPage()">←</button>
-    <h2 id="floor-title"># Floor</h2>
-    <div id="office-layout"></div>
-  </div>
-
-  <!-- Settings Icon and Panel -->
-  <div id="settings-icon" onclick="toggleSettings()">⚙️</div>
-  <div id="settings-panel">
-    <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
-    <button onclick="switchLanguage()">Switch Language (EN/中文)</button>
+    <button id="back-button-office" onclick="goTo('floor-page')">←</button>
+    <h2 id="floor-title">1st Floor</h2>
+    <div id="office-layout" class="office-layout"></div>
   </div>
 
   <script src="script.js"></script>
