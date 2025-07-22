@@ -3,6 +3,7 @@ body {
   font-family: 'Segoe UI', sans-serif;
   background-color: #f2f2f2;
   transition: background-color 0.3s, color 0.3s;
+  text-align: center;
 }
 
 body.dark-mode {
@@ -15,28 +16,29 @@ body.dark-mode {
   padding: 20px;
   height: 100vh;
   box-sizing: border-box;
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .page.active {
-  display: block;
+  display: flex;
 }
 
 #swis-logo {
   display: block;
-  margin: 40px auto 10px;
+  margin-bottom: 20px;
   width: 120px;
 }
 
 #welcome-message {
-  text-align: center;
   font-size: 1.8em;
-  margin: 10px auto;
+  margin: 10px 0;
 }
 
 #start-button {
-  display: block;
-  margin: 30px auto 0;
+  margin-top: 20px;
   padding: 12px 28px;
   font-size: 16px;
   border: none;
@@ -52,7 +54,7 @@ body.dark-mode {
 }
 
 #settings-icon {
-  position: absolute;
+  position: fixed;
   bottom: 20px;
   right: 20px;
   font-size: 24px;
@@ -61,7 +63,7 @@ body.dark-mode {
 }
 
 #settings-panel {
-  position: absolute;
+  position: fixed;
   bottom: 70px;
   right: -200px;
   background: rgba(255, 255, 255, 0.9);
@@ -111,8 +113,7 @@ body.dark-mode #settings-panel {
 }
 
 #floor-title {
-  text-align: center;
-  margin: 30px 0 20px;
+  margin: 20px 0;
   font-size: 24px;
 }
 
