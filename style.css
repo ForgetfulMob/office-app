@@ -1,20 +1,21 @@
 body {
-  font-family: sans-serif;
   margin: 0;
-  padding: 0;
-  background: #ffffff;
-  color: #333;
-  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f2f2f2;
+  transition: background-color 0.3s, color 0.3s;
 }
 
-.dark-mode {
-  background-color: #1e1e1e;
-  color: #f0f0f0;
+body.dark-mode {
+  background-color: #1c1c1c;
+  color: #f2f2f2;
 }
 
 .page {
   display: none;
   padding: 20px;
+  height: 100vh;
+  box-sizing: border-box;
+  position: relative;
 }
 
 .page.active {
@@ -22,18 +23,32 @@ body {
 }
 
 #swis-logo {
+  display: block;
+  margin: 40px auto 10px;
   width: 120px;
-  margin-top: 40px;
 }
 
-#welcome-text {
-  font-size: 24px;
-  margin: 20px 0;
+#welcome-message {
+  text-align: center;
+  font-size: 1.8em;
+  margin: 10px auto;
 }
 
 #start-button {
-  padding: 10px 20px;
-  font-size: 18px;
+  display: block;
+  margin: 30px auto 0;
+  padding: 12px 28px;
+  font-size: 16px;
+  border: none;
+  background-color: #007aff;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+#start-button:hover {
+  background-color: #005bb5;
 }
 
 #settings-icon {
@@ -45,48 +60,88 @@ body {
   z-index: 10;
 }
 
-#settings-menu {
+#settings-panel {
   position: absolute;
   bottom: 70px;
-  right: 20px;
+  right: -200px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  padding: 10px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  background: #eee;
-  padding: 10px;
-  border-radius: 8px;
-  transition: all 0.3s ease;
+  gap: 8px;
+  transition: right 0.4s ease;
+  width: 180px;
 }
 
-.hidden {
-  display: none;
+body.dark-mode #settings-panel {
+  background: rgba(30, 30, 30, 0.95);
 }
 
-.back-button {
-  position: absolute;
-  top: 20px;
-  left: 20px;
+#settings-panel.open {
+  right: 20px;
 }
 
 .floor-buttons {
   display: flex;
-  flex-direction: column;
-  gap: 20px;
-  margin-top: 100px;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 30px;
 }
 
+.floor-btn {
+  padding: 12px 20px;
+  border: none;
+  background: #007aff;
+  color: white;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.back-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 18px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+#floor-title {
+  text-align: center;
+  margin: 30px 0 20px;
+  font-size: 24px;
+}
+
+/* Office Layout Clusters */
 #office-layout {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 60px;
-  gap: 20px;
+  justify-content: space-around;
+  align-items: center;
+  gap: 30px;
+  height: calc(100vh - 120px);
+  overflow-y: auto;
+  padding-bottom: 60px;
+}
+
+.office-cluster {
+  display: grid;
+  grid-template-columns: repeat(2, 80px);
+  grid-gap: 15px;
+  background-color: rgba(200, 200, 200, 0.15);
+  padding: 20px;
+  border-radius: 12px;
 }
 
 .desk {
-  width: 100px;
-  height: 100px;
+  width: 70px;
+  height: 70px;
   background-color: red;
-  border-radius: 8px;
+  border-radius: 10px;
+  transition: background-color 0.3s;
   cursor: pointer;
 }
