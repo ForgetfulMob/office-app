@@ -7,38 +7,38 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Page 1: Start Screen -->
+  <!-- Start Page -->
   <div id="start-page" class="page active">
-    <img src="swis-logo.png" alt="SWIS Logo" id="swis-logo" />
-    <h1 id="welcome-text">Welcome to SWIS Office App</h1>
+    <img id="swis-logo" src="swis-logo.png" alt="SWIS Logo" />
+    <div id="welcome-message">Welcome to SWIS Office App</div>
     <button id="start-button">Enter</button>
-    <div id="settings-icon">⚙️</div>
-
-    <div id="settings-menu" class="hidden">
-      <button id="dark-mode-toggle">🌙 Dark Mode</button>
-      <button id="language-toggle">🌐 中文 / English</button>
-    </div>
   </div>
 
-  <!-- Page 2: Floor Selection -->
+  <!-- Floor Select Page -->
   <div id="floor-page" class="page">
-    <button id="back-to-start" class="back-button">⬅ Back</button>
-    <h2 id="floor-title">Select Floor</h2>
+    <button class="back-btn" onclick="goBack()">←</button>
+    <h2>Select a Floor</h2>
     <div class="floor-buttons">
-      <button class="floor-btn" data-floor="1">1st Floor</button>
-      <button class="floor-btn" data-floor="2">2nd Floor</button>
-      <button class="floor-btn" data-floor="3">3rd Floor</button>
+      <button class="floor-btn" onclick="goToOffice(1)">1st Floor</button>
+      <button class="floor-btn" onclick="goToOffice(2)">2nd Floor</button>
+      <button class="floor-btn" onclick="goToOffice(3)">3rd Floor</button>
     </div>
   </div>
 
-  <!-- Page 3: Office Layout -->
+  <!-- Office Layout Page -->
   <div id="office-page" class="page">
-    <button id="back-to-floor" class="back-button">⬅ Back</button>
-    <h2 id="office-title"># Floor</h2>
+    <button class="back-btn" onclick="goToFloorPage()">←</button>
+    <h2 id="floor-title"># Floor</h2>
     <div id="office-layout"></div>
+  </div>
+
+  <!-- Settings Icon and Panel -->
+  <div id="settings-icon" onclick="toggleSettings()">⚙️</div>
+  <div id="settings-panel">
+    <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
+    <button onclick="switchLanguage()">Switch Language (EN/中文)</button>
   </div>
 
   <script src="script.js"></script>
 </body>
 </html>
-
