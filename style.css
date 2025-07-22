@@ -1,148 +1,83 @@
 body {
   margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #f2f2f2;
-  transition: background-color 0.3s, color 0.3s;
-  text-align: center;
-}
-
-body.dark-mode {
-  background-color: #1c1c1c;
-  color: #f2f2f2;
+  font-family: Arial, sans-serif;
+  background: #f0f0f0;
+  color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 .page {
   display: none;
-  padding: 20px;
-  height: 100vh;
-  box-sizing: border-box;
-  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  height: 100%;
+  width: 100%;
+  position: absolute;
 }
 
 .page.active {
   display: flex;
 }
 
-#swis-logo {
-  display: block;
+#school-logo {
+  width: 150px;
   margin-bottom: 20px;
-  width: 120px;
 }
 
-#welcome-message {
-  font-size: 1.8em;
-  margin: 10px 0;
-}
-
-#start-button {
-  margin-top: 20px;
-  padding: 12px 28px;
-  font-size: 16px;
-  border: none;
-  background-color: #007aff;
-  color: white;
-  border-radius: 8px;
+button {
+  padding: 10px 20px;
+  margin: 10px;
   cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-#start-button:hover {
-  background-color: #005bb5;
 }
 
 #settings-icon {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  font-size: 24px;
+  width: 40px;
   cursor: pointer;
-  z-index: 10;
 }
 
 #settings-panel {
   position: fixed;
-  bottom: 70px;
+  bottom: 80px;
   right: -200px;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 12px;
-  padding: 10px;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  transition: right 0.4s ease;
-  width: 180px;
-}
-
-body.dark-mode #settings-panel {
-  background: rgba(30, 30, 30, 0.95);
+  transition: right 0.3s ease;
 }
 
 #settings-panel.open {
   right: 20px;
 }
 
-.floor-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  margin-top: 30px;
-}
-
-.floor-btn {
-  padding: 12px 20px;
-  border: none;
-  background: #007aff;
-  color: white;
-  border-radius: 6px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.back-btn {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  font-size: 18px;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-#floor-title {
-  margin: 20px 0;
-  font-size: 24px;
-}
-
-/* Office Layout Clusters */
-#office-layout {
+.office-layout {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
-  gap: 30px;
-  height: calc(100vh - 120px);
-  overflow-y: auto;
-  padding-bottom: 60px;
+  justify-content: center;
+  gap: 10px;
+  padding: 20px;
 }
 
 .office-cluster {
   display: grid;
-  grid-template-columns: repeat(2, 80px);
-  grid-gap: 15px;
-  background-color: rgba(200, 200, 200, 0.15);
-  padding: 20px;
-  border-radius: 12px;
+  grid-template-columns: repeat(2, 50px);
+  gap: 10px;
 }
 
 .desk {
-  width: 70px;
-  height: 70px;
-  background-color: red;
-  border-radius: 10px;
-  transition: background-color 0.3s;
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  background: red;
   cursor: pointer;
+}
+
+.dark-mode {
+  background: #111;
+  color: #fff;
 }
