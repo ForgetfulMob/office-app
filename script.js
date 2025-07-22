@@ -1,94 +1,88 @@
-const pages = document.querySelectorAll('.page');
-const officeLayout = document.getElementById("office-layout");
-const floorTitle = document.getElementById("office-title");
+let currentLang = 'en';
+let darkMode = false;
+const deskStates = {
+  1: {}, 2: {}, 3: {}
+};
 
-// Navigation
-document.getElementById("start-button").addEventListener("click", () => {
-  showPage("floor-page");
-});
+document.addEventListener("DOMContentLoaded", () => {
+  const startBtn = document.getElementById("start-button");
+  const floorBtns = document.querySelectorAll(".floor-btn");
+  const backToStart = document.getElementById("back-to-start");
+  const backToFloor = document.getElementById("back-to-floor");
+  const settingsBtn = document.getElementById("settings-icon");
+  const settingsPanel = document.getElementById("settings-panel");
+  const langToggle = document.getElementById("language-toggle");
+  const darkToggle = document.getElementById("dark-mode-toggle");
 
-document.getElementById("back-to-start").addEventListener("click", () => {
-  showPage("start-page");
-});
+  startBtn.onclick = () => showPage("floor-page");
+  backToStart.onclick = () => showPage("start-page");
+  backToFloor.onclick = () => showPage("floor-page");
+  settingsBtn.onclick = () => settingsPanel.classList.toggle("open");
+  darkToggle.onclick = toggleDarkMode;
+  langToggle.onclick = toggleLanguage;
 
-document.getElementById("back-to-floor").addEventListener("click", () => {
-  showPage("floor-page");
-});
-
-// Floor selection
-document.querySelectorAll(".floor-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    const floor = btn.getAttribute("data-floor");
-    floorTitle.textContent = `${floor} Floor`;
-    generateOfficeLayout(floor);
-    showPage("office-page");
+  floorBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const floor = parseInt(btn.dataset.floor);
+      renderOfficeLayout(floor);
+      document.getElementById("floor-title").textContent = `${btn.textContent}`;
+      showPage("office-page");
+    });
   });
+
+  applyLanguage();
 });
 
-// Show/Hide pages
-function showPage(pageId) {
-  pages.forEach(p => p.classList.remove("active"));
-  document.getElementById(pageId).classList.add("active");
+function showPage(id) {
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
 }
 
-// Desk colors: Red → Yellow → Green → Red
-const colorCycle = ["red", "yellow", "green"];
+function renderOfficeLayout(floor) {
+  const layout = document.getElementById("office-layout");
+  layout.innerHTML = '';
+  const clusters = 4;
+  const desksPerCluster = 4;
 
-function generateOfficeLayout(floor) {
-  officeLayout.innerHTML = "";
+  for (let i = 0; i < clusters; i++) {
+    const cluster = document.createElement("div");
+    cluster.className = "office-cluster";
 
-  // Example layout for each floor
-  const deskCount = floor === "1" ? 4 : floor === "2" ? 6 : 9;
+    for (let j = 0; j < desksPerCluster; j++) {
+      const deskId = `${floor}-${i}-${j}`;
+      const desk = document.createElement("div");
+      desk.className = "desk";
+      desk.dataset.id = deskId;
 
-  for (let i = 0; i < deskCount; i++) {
-    const desk = document.createElement("div");
-    desk.className = "desk";
-    desk.style.backgroundColor = "red";
-    desk.addEventListener("click", () => {
-      let currentColor = desk.style.backgroundColor;
-      let nextColor =
-        colorCycle[(colorCycle.indexOf(currentColor) + 1) % colorCycle.length];
-      desk.style.backgroundColor = nextColor;
-    });
-    officeLayout.appendChild(desk);
+      const state = deskStates[floor][deskId] || 0;
+      desk.style.backgroundColor = ["red", "yellow", "green"][state];
+
+      desk.onclick = () => {
+        const current = deskStates[floor][deskId] || 0;
+        const next = (current + 1) % 3;
+        deskStates[floor][deskId] = next;
+        desk.style.backgroundColor = ["red", "yellow", "green"][next];
+      };
+
+      cluster.appendChild(desk);
+    }
+
+    layout.appendChild(cluster);
   }
 }
 
-// Settings panel toggle
-const settingsIcon = document.getElementById("settings-icon");
-const settingsMenu = document.getElementById("settings-menu");
-
-settingsIcon.addEventListener("click", () => {
-  settingsMenu.classList.toggle("hidden");
-});
-
-// Dark mode
-document.getElementById("dark-mode-toggle").addEventListener("click", () => {
+function toggleDarkMode() {
+  darkMode = !darkMode;
   document.body.classList.toggle("dark-mode");
-});
+}
 
-// Language toggle
-let english = true;
-document.getElementById("language-toggle").addEventListener("click", () => {
-  english = !english;
+function toggleLanguage() {
+  currentLang = currentLang === "en" ? "zh" : "en";
+  applyLanguage();
+}
 
-  document.getElementById("welcome-text").textContent = english
-    ? "Welcome to SWIS Office App"
-    : "欢迎使用深外办公应用";
-
-  document.getElementById("start-button").textContent = english
-    ? "Enter"
-    : "进入";
-
-  document.getElementById("floor-title").textContent = english
-    ? "Select Floor"
-    : "选择楼层";
-
-  document.querySelectorAll(".floor-btn").forEach((btn, i) => {
-    const floors = english ? ["1st Floor", "2nd Floor", "3rd Floor"] : ["一楼", "二楼", "三楼"];
-    btn.textContent = floors[i];
+function applyLanguage() {
+  document.querySelectorAll("[data-en]").forEach(el => {
+    el.textContent = el.getAttribute(`data-${currentLang}`);
   });
-
-  document.getElementById("back-to-start").textContent = english ? "⬅ Back" : "⬅ 返回";
-  document.getElementById("back-to-floor").textContent = english ? "⬅ Back" : "⬅ 返回";
-});
+}
