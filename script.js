@@ -1,88 +1,70 @@
-let currentLang = 'en';
-let darkMode = false;
-const deskStates = {
-  1: {}, 2: {}, 3: {}
-};
+let currentFloor = 1;
+const deskStates = { 1: [], 2: [], 3: [] };
+const colors = ['red', 'yellow', 'green'];
 
-document.addEventListener("DOMContentLoaded", () => {
-  const startBtn = document.getElementById("start-button");
-  const floorBtns = document.querySelectorAll(".floor-btn");
-  const backToStart = document.getElementById("back-to-start");
-  const backToFloor = document.getElementById("back-to-floor");
-  const settingsBtn = document.getElementById("settings-icon");
-  const settingsPanel = document.getElementById("settings-panel");
-  const langToggle = document.getElementById("language-toggle");
-  const darkToggle = document.getElementById("dark-mode-toggle");
-
-  startBtn.onclick = () => showPage("floor-page");
-  backToStart.onclick = () => showPage("start-page");
-  backToFloor.onclick = () => showPage("floor-page");
-  settingsBtn.onclick = () => settingsPanel.classList.toggle("open");
-  darkToggle.onclick = toggleDarkMode;
-  langToggle.onclick = toggleLanguage;
-
-  floorBtns.forEach(btn => {
-    btn.addEventListener("click", () => {
-      const floor = parseInt(btn.dataset.floor);
-      renderOfficeLayout(floor);
-      document.getElementById("floor-title").textContent = `${btn.textContent}`;
-      showPage("office-page");
-    });
-  });
-
-  applyLanguage();
-});
-
-function showPage(id) {
-  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
+function $(id) {
+  return document.getElementById(id);
 }
 
-function renderOfficeLayout(floor) {
-  const layout = document.getElementById("office-layout");
-  layout.innerHTML = '';
+function goTo(pageId) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  $(pageId).classList.add('active');
+}
+
+function goBack() {
+  goTo('start-page');
+}
+
+function goToFloorPage() {
+  goTo('floor-page');
+}
+
+$('start-button').onclick = () => {
+  goTo('floor-page');
+};
+
+function goToOffice(floor) {
+  currentFloor = floor;
+  $('floor-title').innerText = `${floor} Floor`;
+  generateOfficeLayout(floor);
+  goTo('office-page');
+}
+
+function generateOfficeLayout(floor) {
+  const container = $('office-layout');
+  container.innerHTML = '';
   const clusters = 4;
-  const desksPerCluster = 4;
-
-  for (let i = 0; i < clusters; i++) {
-    const cluster = document.createElement("div");
-    cluster.className = "office-cluster";
-
-    for (let j = 0; j < desksPerCluster; j++) {
-      const deskId = `${floor}-${i}-${j}`;
-      const desk = document.createElement("div");
-      desk.className = "desk";
-      desk.dataset.id = deskId;
-
-      const state = deskStates[floor][deskId] || 0;
-      desk.style.backgroundColor = ["red", "yellow", "green"][state];
-
+  for (let c = 0; c < clusters; c++) {
+    const cluster = document.createElement('div');
+    cluster.className = 'office-cluster';
+    for (let i = 0; i < 4; i++) {
+      const index = c * 4 + i;
+      const desk = document.createElement('div');
+      desk.className = 'desk';
+      const state = deskStates[floor][index] || 0;
+      desk.style.backgroundColor = colors[state];
       desk.onclick = () => {
-        const current = deskStates[floor][deskId] || 0;
-        const next = (current + 1) % 3;
-        deskStates[floor][deskId] = next;
-        desk.style.backgroundColor = ["red", "yellow", "green"][next];
+        const newState = (deskStates[floor][index] = (state + 1) % 3);
+        desk.style.backgroundColor = colors[newState];
       };
-
       cluster.appendChild(desk);
     }
-
-    layout.appendChild(cluster);
+    container.appendChild(cluster);
   }
 }
 
+function toggleSettings() {
+  $('settings-panel').classList.toggle('open');
+}
+
 function toggleDarkMode() {
-  darkMode = !darkMode;
-  document.body.classList.toggle("dark-mode");
+  document.body.classList.toggle('dark-mode');
 }
 
-function toggleLanguage() {
-  currentLang = currentLang === "en" ? "zh" : "en";
-  applyLanguage();
-}
-
-function applyLanguage() {
-  document.querySelectorAll("[data-en]").forEach(el => {
-    el.textContent = el.getAttribute(`data-${currentLang}`);
-  });
+let currentLang = 'EN';
+function switchLanguage() {
+  currentLang = currentLang === 'EN' ? 'ZH' : 'EN';
+  $('welcome-message').innerText = currentLang === 'EN' ? 'Welcome to SWIS Office App' : '欢迎来到深外办公系统';
+  $('start-button').innerText = currentLang === 'EN' ? 'Enter' : '进入';
+  $('floor-title').innerText = `${currentFloor} ${currentLang === 'EN' ? 'Floor' : '楼'}`;
 }
