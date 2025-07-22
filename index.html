@@ -8,33 +8,33 @@
 </head>
 <body>
   <!-- Start Screen -->
-  <div id="start-page" class="page">
-    <img src="logo.png" alt="SWIS Logo" class="logo"/>
-    <h1>Welcome to the SWIS Office App</h1>
-    <button onclick="goToFloorSelect()">Enter</button>
-    <div class="settings-icon" onclick="toggleSettings()">⚙️</div>
+  <div id="start-page" class="page active">
+    <img src="swis-logo.png" alt="SWIS Logo" id="swis-logo" />
+    <h1 id="welcome-message" data-en="Welcome to SWIS Office App" data-zh="欢迎来到深外办公应用">Welcome to SWIS Office App</h1>
+    <button id="start-button" data-en="Enter" data-zh="进入">Enter</button>
+    <div id="settings-icon">⚙️</div>
     <div id="settings-panel">
-      <button onclick="toggleDarkMode()">🌙 Dark Mode</button>
-      <button onclick="switchLanguage()">🌐 中文 / English</button>
+      <button id="dark-mode-toggle" data-en="Toggle Dark Mode" data-zh="切换深色模式">Toggle Dark Mode</button>
+      <button id="language-toggle" data-en="Switch to 中文" data-zh="切换到 English">Switch to 中文</button>
     </div>
   </div>
 
   <!-- Floor Selection Page -->
-  <div id="floor-select" class="page hidden">
-    <button class="back-btn" onclick="goToStart()">⬅ Back</button>
-    <h2>Select a Floor</h2>
+  <div id="floor-page" class="page">
+    <button id="back-to-start" class="back-btn" data-en="Back" data-zh="返回">⬅️</button>
+    <h2 data-en="Choose a Floor" data-zh="选择楼层">Choose a Floor</h2>
     <div class="floor-buttons">
-      <button onclick="loadOffice('1st')">1st Floor</button>
-      <button onclick="loadOffice('2nd')">2nd Floor</button>
-      <button onclick="loadOffice('3rd')">3rd Floor</button>
+      <button class="floor-btn" data-floor="1" data-en="1st Floor" data-zh="一楼">1st Floor</button>
+      <button class="floor-btn" data-floor="2" data-en="2nd Floor" data-zh="二楼">2nd Floor</button>
+      <button class="floor-btn" data-floor="3" data-en="3rd Floor" data-zh="三楼">3rd Floor</button>
     </div>
   </div>
 
-  <!-- Office Map Page -->
-  <div id="office-map" class="page hidden">
-    <button class="back-btn" onclick="goToFloorSelect()">⬅ Back</button>
-    <h2 id="floor-title">Office</h2>
-    <div id="map-container"></div>
+  <!-- Office Page -->
+  <div id="office-page" class="page">
+    <button id="back-to-floor" class="back-btn" data-en="Back" data-zh="返回">⬅️</button>
+    <h2 id="floor-title"># Floor</h2>
+    <div id="office-layout"></div>
   </div>
 
   <script src="script.js"></script>
